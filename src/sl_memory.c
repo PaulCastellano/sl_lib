@@ -1,21 +1,21 @@
 #include "../include/sl_memory.h"
 
-void    sl_bzero(void *s, size_t n)
+void    setMemoryToZero(void *s, size_t n)
 {
-    sl_memset(s, 0, n);
+    setMemory(s, 0, n);
 }
 
-void*   sl_memalloc(size_t size)
+void*   memoryAlloc(size_t size)
 {
     void* memmory;
 
     memmory = (void*)malloc(size);
-    sl_bzero(memmory, size);
+    setMemoryToZero(memmory, size);
 
     return memmory;
 }
 
-void*   sl_memccpy(void* dest, const void* src, int c, size_t n)
+void*   memoryCopybyC(void* dest, const void* src, int c, size_t n)
 {
    int i = -1;
    
@@ -27,7 +27,7 @@ void*   sl_memccpy(void* dest, const void* src, int c, size_t n)
    return dest;
 }
 
-void*   sl_memchr(const void* s, int c, size_t n)
+void*   memoryFindC(const void* s, int c, size_t n)
 {
     unsigned char *p = (unsigned char*)s;
 
@@ -45,7 +45,7 @@ void*   sl_memchr(const void* s, int c, size_t n)
     return 0;
 }
 
-int     sl_memcmp(const void* s1, const void* s2,size_t n)
+int     memoryCompare(const void* s1, const void* s2,size_t n)
 {
     const unsigned char *p1 = s1;
     const unsigned char *p2 = s2;
@@ -65,7 +65,7 @@ int     sl_memcmp(const void* s1, const void* s2,size_t n)
     return *p1 - *p2;
 }
 
-void*   sl_memcpy(void *dest, const void *src, size_t n)
+void*   memoryCopy(void *dest, const void *src, size_t n)
 {
    int i = -1;
    
@@ -77,7 +77,7 @@ void*   sl_memcpy(void *dest, const void *src, size_t n)
     return dest;
 }
 
-void    sl_memdel(void **ap)
+void    memoryDestroy(void **ap)
 {
     if (ap != NULL)
 	{
@@ -86,15 +86,15 @@ void    sl_memdel(void **ap)
 	}
 }
 
-void*   sl_memmove(void *dest, const void *src, size_t n)
+void*   memoryMove(void *dest, const void *src, size_t n)
 {
     unsigned char tmp[n];
-    sl_memcpy(tmp,src,n);
-    sl_memcpy(dest,tmp,n);
+    memoryCopy(tmp,src,n);
+    memoryCopy(dest,tmp,n);
     return dest;
 }
 
-void*   sl_memset(void *s, int c, size_t n)
+void*   setMemory(void *s, int c, size_t n)
 {
     unsigned char* p;
 
