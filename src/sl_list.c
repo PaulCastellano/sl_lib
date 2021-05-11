@@ -1,6 +1,6 @@
 #include "../include/sl_list.h"
 
-Node*   sl_nodenew(void const *content)
+Node*   createNode(void const *content)
 {
     Node*  node;
 
@@ -10,7 +10,7 @@ Node*   sl_nodenew(void const *content)
     return node;
 }
 
-List* sl_lstnew(void const **content, size_t node_size)
+List* createList(void const **content, size_t node_size)
 {
     List*   newList;
     Node*   tmp;
@@ -34,4 +34,87 @@ List* sl_lstnew(void const **content, size_t node_size)
         }
     }
     return newList;
+}
+
+
+//destory node
+int    destroyNode(Node* node)
+{
+    if (node->content != NULL)
+        free(node->content);
+    free(node);
+    if (node == NULL)
+        return TRUE;
+    return FALSE;
+}
+
+int    destroyNodeByPosition(Node* node, int index)
+{
+    Node* tmp;
+    Node* toDelete;
+
+    tmp = node;
+    toDelete = tmp;
+    while (toDelete || index--) {
+        tmp = toDelete;
+        toDelete = tmp->next;
+    }
+    if (toDelete == NULL)
+        return FALSE;
+    tmp->next = toDelete->next;
+
+    return destroyNode(toDelete);
+}
+
+int     destroyNodeByContent(Node* node, void *content)
+{
+    Node* tmp;
+    Node* toDelete;
+
+    tmp = node;
+    toDelete = tmp;
+    while (toDelete || toDelete->content != content) {
+        tmp = toDelete;
+        toDelete = tmp->next;
+    }
+    if (toDelete == NULL)
+        return FALSE;
+
+    tmp->next = toDelete->next;
+    return destroyNode(toDelete);
+}
+
+int    destroyNodeList(Node* node)
+{
+    Node*   tmp;
+    int     result = TRUE;
+
+    while (node)
+    {
+        tmp = node->next;
+        if (sl_destroyNode(node) == FALSE)
+            result = FALSE;
+        node = tmp;
+    }
+    return result;
+}
+
+//destroy List
+int    destroyList(List* lst)
+{
+    int result;
+    result = destroyNodeList(lst->node);
+    if (lst)
+        free(lst);
+    return result && (lst != NULL);
+}
+
+int    destroyNodeListbyPosition(List* lst, int index)
+{
+    return destroyNodeByPosition(lst->node, index);
+}
+
+int    destroyNodeListbyContent(List* lst, void* content)
+{
+    return destroyNodeByContent(lst->node, content);
 }

@@ -14,15 +14,16 @@ typedef struct List
 }               List;
 
 //create node/list
-Node*   sl_nodenew(void const *content);
-List*   sl_lstnew(void const **content, size_t node_size);
+Node*   createNode(void const *);
+List*   createList(void const **, size_t);
 
 //destory node
-int    sl_destroyNode(Node* node);
-int    sl_destroyNodebyPossition(Node* node, int index);
-int    sl_destroyNodeList(Node* node);
+int     destroyNode(Node*);
+int     destroyNodeByPosition(Node*, int);
+int     destroyNodeByContent(Node*, int);
+int     destroyNodeList(Node*);
 
 //destroy List
-int    sl_destroyList(List* lst);
-int    sl_destroyListNodebyPossition(List* lst, int index);
-int    sl_destroeyListNodebyContent(List* lst, void* content);
+int     destroyList(List*);
+int     destroyNodeListbyPosition(List*, int);
+int     destroyNodeListbyContent(List*, void*);
