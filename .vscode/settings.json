@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "sl_string.h": "c",
-        "sl_list.h": "c"
+        "sl_list.h": "c",
+        "sl_memory.h": "c"
     }
 }

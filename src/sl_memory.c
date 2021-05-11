@@ -9,6 +9,9 @@ void*   memoryAlloc(size_t size)
 {
     void* memmory;
 
+    if (size == 0)
+        return NULL;
+
     memmory = (void*)malloc(size);
     setMemoryToZero(memmory, size);
 
@@ -96,14 +99,15 @@ void*   memoryMove(void *dest, const void *src, size_t n)
 
 void*   setMemory(void *s, int c, size_t n)
 {
-    unsigned char* p;
+    int* p;
 
     p = s;
     while (n--)
     {
         if (*p) { return s; }
 
-        *p = (unsigned char)c;
+        *(p + n) = c;
+        
     }
     return s;
 }

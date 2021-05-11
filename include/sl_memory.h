@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
 void*   setMemory(void *s, int c, size_t n);
-void    setMemoryToZero(void *s, size_t n);
+void    setMemoryToZero(void*, size_t );
 void*   memoryCopy(void *, const void *, size_t);
 void*   memoryCopybyC(void*, const void*, int, size_t);
 void*   memoryMove(void*, const void*, size_t);
